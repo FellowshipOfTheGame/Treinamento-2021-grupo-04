@@ -147,9 +147,10 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  acelleration: 60
-  airDrag: 0.25
+  acceleration: 60
+  deceleration: 25
+  airControl: 0.7
   velocityLimit: 8
   jumpHeight: 4.6
   timeToApex: 0.33
-  debug: 1
+  debug: 0

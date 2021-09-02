@@ -12,8 +12,9 @@ public class PlayerController : MonoBehaviour
 
     // Movement variables
     [Header("Horizontal movement")]
-    [SerializeField] float acelleration;
-    [SerializeField] [Range(0,1)] float airDrag;
+    [SerializeField] float acceleration;
+    [SerializeField] float deceleration;
+    [SerializeField] [Range(0,1)] float airControl;
     [SerializeField] float velocityLimit;
 
     [Header("Jump variables")]
@@ -36,8 +37,13 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        InitializeVariables();
+    }
+
+    private void InitializeVariables()
+    {
         gravity = -2 * jumpHeight / (timeToApex * timeToApex);
-        Physics2D.gravity = new Vector2(0, gravity);
+        rb2D.gravityScale = gravity / Physics2D.gravity.y;
     }
 
     // Update is called once per frame
@@ -47,9 +53,7 @@ public class PlayerController : MonoBehaviour
 
         if (debug)
         {
-            // recalculate variables
-            gravity = -2 * jumpHeight / (timeToApex * timeToApex);
-            Physics2D.gravity = new Vector2(0, gravity);
+            InitializeVariables();
         }
     }
 
@@ -69,8 +73,8 @@ public class PlayerController : MonoBehaviour
             Vector2 aux = rb2D.velocity;
             if (aux.x < velocityLimit)
             {
-                float velocityChange = acelleration * Time.deltaTime;
-                if (!grounded) velocityChange *= 1 - airDrag;
+                float velocityChange = acceleration * Time.deltaTime;
+                if (!grounded) velocityChange *= airControl;
                 aux += new Vector2(velocityChange, 0);
                 if (aux.x > velocityLimit) aux.x = velocityLimit;
                 rb2D.velocity = aux;
@@ -82,8 +86,8 @@ public class PlayerController : MonoBehaviour
             Vector2 aux = rb2D.velocity;
             if (aux.x > -velocityLimit)
             {
-                float velocityChange = acelleration * Time.deltaTime;
-                if (!grounded) velocityChange *= 1 - airDrag;
+                float velocityChange = acceleration * Time.deltaTime;
+                if (!grounded) velocityChange *= airControl;
                 aux -= new Vector2(velocityChange, 0);
                 if (aux.x < -velocityLimit) aux.x = -velocityLimit;
                 rb2D.velocity = aux;
@@ -93,21 +97,21 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector2 aux = rb2D.velocity;
-            float velocityChange = acelleration * Time.deltaTime;
-            if (!grounded) velocityChange *= 1 - airDrag;
+            float velocityChange = deceleration * Time.deltaTime;
+            if (!grounded) velocityChange *= airControl;
 
             if (rb2D.velocity.x > 0)
             {
                 aux -= new Vector2(velocityChange, 0);
                 if (aux.x < 0) aux.x = 0;
-                rb2D.velocity = aux;
             }
             else if (rb2D.velocity.x < 0)
             {
                 aux += new Vector2(velocityChange, 0);
                 if (aux.x > 0) aux.x = 0;
-                rb2D.velocity = aux;
             }
+            
+            rb2D.velocity = aux;
         }
     }
 
@@ -124,9 +128,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        rb2D.AddForce(transform.up * -gravity * timeToApex, ForceMode2D.Impulse);
-
-        //rb2D.AddForce(new Vector2(1, 1).normalized * -gravity * timeToApex, ForceMode2D.Impulse);
+        rb2D.velocity += new Vector2(0, -gravity * timeToApex);
     }
 
     private void CheckGrounded()
