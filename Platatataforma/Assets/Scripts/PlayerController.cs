@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Player identification
+    int player = 0;
+
     // Grounded check
     bool grounded;
     [SerializeField] LayerMask groundMask;
@@ -20,7 +23,6 @@ public class PlayerController : MonoBehaviour
     [Header("Jump variables")]
     [SerializeField] float jumpHeight;
     [SerializeField] float timeToApex;
-
     float gravity;
 
     // Input variables
@@ -33,11 +35,23 @@ public class PlayerController : MonoBehaviour
     // Debug purpose
     [SerializeField] bool debug;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
         InitializeVariables();
+        SetPlayer();
+    }
+
+    private void SetPlayer()
+    {
+        if (gameObject.CompareTag("Player1"))
+        {
+            player = 1;
+        }
+        else if (gameObject.CompareTag("Player2"))
+        {
+            player = 2;
+        }
     }
 
     private void InitializeVariables()
@@ -49,7 +63,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInputs();
+        ManageInputs();
 
         if (debug)
         {
@@ -115,8 +129,44 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void GetInputs()
+    private void ManageInputs()
     {
+        if (player == 1)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                jumpKey = true;
+            }
+
+            horizontalMove = 0;
+            if (Input.GetKey(KeyCode.D))
+            {
+                horizontalMove = 1;
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                horizontalMove = -1;
+            }
+        }
+        else if (player == 2)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                jumpKey = true;
+            }
+
+            horizontalMove = 0;
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                horizontalMove = 1;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                horizontalMove = -1;
+            }
+        }
+
+        /*
         if (Input.GetButtonDown("Jump"))
         {
             jumpKey = true;
@@ -124,6 +174,7 @@ public class PlayerController : MonoBehaviour
 
         float hMoveRaw = Input.GetAxisRaw("Horizontal");
         horizontalMove = (hMoveRaw > 0.15f) ? 1 : (hMoveRaw < -0.15f) ? -1 : 0;
+        */
     }
 
     private void Jump()
