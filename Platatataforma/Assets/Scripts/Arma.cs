@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Arma : MonoBehaviour {
     public GameObject projetilPrefab;
-    public GameObject arma;
     GameObject projetil;
     // Start is called before the first frame update
     void Start() {
@@ -23,7 +22,7 @@ public class Arma : MonoBehaviour {
             offset.x = 1f;
             offset.y = 1f;
             offset.z = 0f;
-            projetil.transform.position = arma.transform.position + offset;
+            projetil.transform.position = this.transform.position + offset;
         }
     }
 }

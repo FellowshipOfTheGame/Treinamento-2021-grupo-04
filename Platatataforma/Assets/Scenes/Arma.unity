@@ -248,7 +248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449544147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.55, y: 0.45, z: -3.555736}
+  m_LocalPosition: {x: 10.19, y: 0.17, z: -3.555736}
   m_LocalScale: {x: 10, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -369,7 +369,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projetilPrefab: {fileID: 3849103069012504970, guid: d4a868b7d4543414db274889aa47ce6a, type: 3}
-  arma: {fileID: 1801647406}
 --- !u!4 &1801647408
 Transform:
   m_ObjectHideFlags: 0
@@ -378,7 +377,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801647406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -10.49, y: -0.14, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -472,6 +471,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3849103069012504969, guid: d4a868b7d4543414db274889aa47ce6a, type: 3}
+      propertyPath: speed
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 3849103069012504970, guid: d4a868b7d4543414db274889aa47ce6a, type: 3}
       propertyPath: m_Name
       value: Projetil

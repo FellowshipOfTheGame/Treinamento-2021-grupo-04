@@ -6,13 +6,11 @@ public class Projetil : MonoBehaviour
 {
     public float speed = 400;
     public Rigidbody2D rb2d;
-    public Vector2 vel;
+    public Vector2 vel = new Vector2(1, 1);
 
     // Start is called before the first frame update,
     void Start()
     {
-        vel.x = 1f;
-        vel.y = 1f;
         rb2d.AddForce(vel * speed);
 
         
