@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Arma : MonoBehaviour {
-    public GameObject proj_guia;
-    private GameObject proj;
+    public GameObject projetilPrefab;
     public GameObject arma;
+    GameObject projetil;
     // Start is called before the first frame update
     void Start() {
         
@@ -17,8 +17,13 @@ public class Arma : MonoBehaviour {
     }
 
     void OnAtirar(){
-        proj = Instantiate(proj_guia);
-        proj.transform.position = arma.transform.position;
-        Destroy (proj, 1.5f);
+        if(!projetil){
+            projetil = Instantiate(projetilPrefab) as GameObject;
+            Vector3 offset;
+            offset.x = 1f;
+            offset.y = 1f;
+            offset.z = 0f;
+            projetil.transform.position = arma.transform.position + offset;
+        }
     }
 }
