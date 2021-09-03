@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     // Cached components
     Rigidbody2D rb2D;
+    Arma arma;
 
     // Debug purpose
     [SerializeField] bool debug;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        arma = GetComponent<Arma>();
         InitializeVariables();
         SetPlayer();
     }
@@ -133,6 +135,10 @@ public class PlayerController : MonoBehaviour
     {
         if (player == 1)
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                arma.Atirar();
+            }
             if (Input.GetKeyDown(KeyCode.W))
             {
                 jumpKey = true;

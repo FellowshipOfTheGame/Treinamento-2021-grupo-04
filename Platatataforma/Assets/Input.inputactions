@@ -1,0 +1,33 @@
+{
+    "name": "Input",
+    "maps": [
+        {
+            "name": "Arma",
+            "id": "0e9bac5f-e38a-42dd-afb4-b89d097097a2",
+            "actions": [
+                {
+                    "name": "Atirar",
+                    "type": "Button",
+                    "id": "9025dcf5-b1d4-4312-b4ac-7735c7e595c3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "577caa5c-ef93-4860-82ee-ea4999cdbf0a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Atirar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

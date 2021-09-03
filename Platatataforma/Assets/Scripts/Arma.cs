@@ -15,7 +15,7 @@ public class Arma : MonoBehaviour {
         
     }
 
-    void OnAtirar(){
+    public void Atirar(){
         if(!projetil){
             projetil = Instantiate(projetilPrefab) as GameObject;
             Vector3 offset;
