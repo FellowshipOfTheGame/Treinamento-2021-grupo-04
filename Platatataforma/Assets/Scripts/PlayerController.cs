@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
         pointB = new Vector2(transform.position.x + transform.localScale.x / 2 - groundCheckWidth, 
             transform.position.y - transform.localScale.y / 2 - groundCheckWidth);
 
-        if (Physics2D.OverlapArea(pointA, pointB, groundMask))
+        if (Physics2D.OverlapArea(pointA, pointB, groundMask) && rb2D.velocity.y <= 0)
         {
             grounded = true;
         }
