@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Player identification
+    int player = 0;
+
     // Grounded check
     bool grounded;
     [SerializeField] LayerMask groundMask;
@@ -12,14 +15,14 @@ public class PlayerController : MonoBehaviour
 
     // Movement variables
     [Header("Horizontal movement")]
-    [SerializeField] float acelleration;
-    [SerializeField] [Range(0,1)] float airDrag;
+    [SerializeField] float acceleration;
+    [SerializeField] float deceleration;
+    [SerializeField] [Range(0,1)] float airControl;
     [SerializeField] float velocityLimit;
 
     [Header("Jump variables")]
     [SerializeField] float jumpHeight;
     [SerializeField] float timeToApex;
-
     float gravity;
 
     // Input variables
@@ -32,24 +35,39 @@ public class PlayerController : MonoBehaviour
     // Debug purpose
     [SerializeField] bool debug;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        InitializeVariables();
+        SetPlayer();
+    }
+
+    private void SetPlayer()
+    {
+        if (gameObject.CompareTag("Player1"))
+        {
+            player = 1;
+        }
+        else if (gameObject.CompareTag("Player2"))
+        {
+            player = 2;
+        }
+    }
+
+    private void InitializeVariables()
+    {
         gravity = -2 * jumpHeight / (timeToApex * timeToApex);
-        Physics2D.gravity = new Vector2(0, gravity);
+        rb2D.gravityScale = gravity / Physics2D.gravity.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetInputs();
+        ManageInputs();
 
         if (debug)
         {
-            // recalculate variables
-            gravity = -2 * jumpHeight / (timeToApex * timeToApex);
-            Physics2D.gravity = new Vector2(0, gravity);
+            InitializeVariables();
         }
     }
 
@@ -69,8 +87,8 @@ public class PlayerController : MonoBehaviour
             Vector2 aux = rb2D.velocity;
             if (aux.x < velocityLimit)
             {
-                float velocityChange = acelleration * Time.deltaTime;
-                if (!grounded) velocityChange *= 1 - airDrag;
+                float velocityChange = acceleration * Time.deltaTime;
+                if (!grounded) velocityChange *= airControl;
                 aux += new Vector2(velocityChange, 0);
                 if (aux.x > velocityLimit) aux.x = velocityLimit;
                 rb2D.velocity = aux;
@@ -82,8 +100,8 @@ public class PlayerController : MonoBehaviour
             Vector2 aux = rb2D.velocity;
             if (aux.x > -velocityLimit)
             {
-                float velocityChange = acelleration * Time.deltaTime;
-                if (!grounded) velocityChange *= 1 - airDrag;
+                float velocityChange = acceleration * Time.deltaTime;
+                if (!grounded) velocityChange *= airControl;
                 aux -= new Vector2(velocityChange, 0);
                 if (aux.x < -velocityLimit) aux.x = -velocityLimit;
                 rb2D.velocity = aux;
@@ -93,26 +111,62 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector2 aux = rb2D.velocity;
-            float velocityChange = acelleration * Time.deltaTime;
-            if (!grounded) velocityChange *= 1 - airDrag;
+            float velocityChange = deceleration * Time.deltaTime;
+            if (!grounded) velocityChange *= airControl;
 
             if (rb2D.velocity.x > 0)
             {
                 aux -= new Vector2(velocityChange, 0);
                 if (aux.x < 0) aux.x = 0;
-                rb2D.velocity = aux;
             }
             else if (rb2D.velocity.x < 0)
             {
                 aux += new Vector2(velocityChange, 0);
                 if (aux.x > 0) aux.x = 0;
-                rb2D.velocity = aux;
             }
+            
+            rb2D.velocity = aux;
         }
     }
 
-    private void GetInputs()
+    private void ManageInputs()
     {
+        if (player == 1)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                jumpKey = true;
+            }
+
+            horizontalMove = 0;
+            if (Input.GetKey(KeyCode.D))
+            {
+                horizontalMove = 1;
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                horizontalMove = -1;
+            }
+        }
+        else if (player == 2)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                jumpKey = true;
+            }
+
+            horizontalMove = 0;
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                horizontalMove = 1;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                horizontalMove = -1;
+            }
+        }
+
+        /*
         if (Input.GetButtonDown("Jump"))
         {
             jumpKey = true;
@@ -120,13 +174,12 @@ public class PlayerController : MonoBehaviour
 
         float hMoveRaw = Input.GetAxisRaw("Horizontal");
         horizontalMove = (hMoveRaw > 0.15f) ? 1 : (hMoveRaw < -0.15f) ? -1 : 0;
+        */
     }
 
     private void Jump()
     {
-        rb2D.AddForce(transform.up * -gravity * timeToApex, ForceMode2D.Impulse);
-
-        //rb2D.AddForce(new Vector2(1, 1).normalized * -gravity * timeToApex, ForceMode2D.Impulse);
+        rb2D.velocity += new Vector2(0, -gravity * timeToApex);
     }
 
     private void CheckGrounded()
@@ -138,7 +191,7 @@ public class PlayerController : MonoBehaviour
         pointB = new Vector2(transform.position.x + transform.localScale.x / 2 - groundCheckWidth, 
             transform.position.y - transform.localScale.y / 2 - groundCheckWidth);
 
-        if (Physics2D.OverlapArea(pointA, pointB, groundMask))
+        if (Physics2D.OverlapArea(pointA, pointB, groundMask) && rb2D.velocity.y <= 0)
         {
             grounded = true;
         }
