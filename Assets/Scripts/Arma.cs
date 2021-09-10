@@ -14,16 +14,10 @@ public class Arma : MonoBehaviour {
         playerController = GetComponent<PlayerController>();
     }
 
-
     public void Atirar(){
         if(!projetil){
             projetil = Instantiate(projetilPrefab, shotPosition.position, transform.rotation) as GameObject;
             projetil.GetComponent<Projetil>().SetOwner(playerController.GetPlayer());
-            Vector3 offset;
-            offset.x = 1f;
-            offset.y = 1f;
-            offset.z = 0f;
-            //projetil.transform.position = this.transform.position + offset;
         }
     }
 }

@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1616714775275577418}
   - component: {fileID: 1616714775275577419}
+  - component: {fileID: 6056464998802956098}
   - component: {fileID: 1616714775275577420}
   - component: {fileID: 1616714775275577417}
+  - component: {fileID: 3809382406787224183}
   m_Layer: 6
   m_Name: Platform (1)
   m_TagString: Untagged
@@ -84,6 +86,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &6056464998802956098
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616714775275577421}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &1616714775275577420
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -129,3 +152,19 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &3809382406787224183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616714775275577421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3ea54339d56b1a47a03c3c783c7ae82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freqY: 1
+  ampY: 0.0008
+  freqX: 1
+  ampX: 0

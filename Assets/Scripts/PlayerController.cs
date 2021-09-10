@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb2D;
     Arma arma;
 
+    //
+    GameObject currentPlatform;
+
     // Debug purpose
     [SerializeField] bool debug;
 
@@ -78,9 +81,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         ManageInputs();
+        if (currentPlatform != null)
+        {
+            ManagePlatform();
+        }
 
         if (debug)
         {
@@ -152,13 +157,24 @@ public class PlayerController : MonoBehaviour
     {
         if (player == 1)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 arma.Atirar();
             }
             if (Input.GetKeyDown(KeyCode.W))
             {
                 jumpKey = true;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                if (currentPlatform == null)
+                {
+                    currentPlatform = FindPlaform();
+                }
+                else
+                {
+                    currentPlatform.GetComponent<PlatformEffector2D>().rotationalOffset = 180f;
+                }
             }
 
             horizontalMove = 0;
@@ -173,9 +189,24 @@ public class PlayerController : MonoBehaviour
         }
         else if (player == 2)
         {
+            if (Input.GetKeyDown(KeyCode.RightControl))
+            {
+                arma.Atirar();
+            }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 jumpKey = true;
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {   
+                if (currentPlatform == null)
+                {
+                    currentPlatform = FindPlaform();
+                }
+                else
+                {
+                    currentPlatform.GetComponent<PlatformEffector2D>().rotationalOffset = 180f;
+                }
             }
 
             horizontalMove = 0;
@@ -188,16 +219,6 @@ public class PlayerController : MonoBehaviour
                 horizontalMove = -1;
             }
         }
-
-        /*
-        if (Input.GetButtonDown("Jump"))
-        {
-            jumpKey = true;
-        }
-
-        float hMoveRaw = Input.GetAxisRaw("Horizontal");
-        horizontalMove = (hMoveRaw > 0.15f) ? 1 : (hMoveRaw < -0.15f) ? -1 : 0;
-        */
     }
 
     private void FlipPlayer()
@@ -222,6 +243,8 @@ public class PlayerController : MonoBehaviour
             else dano = danoMax;
         }
         multiplier = dano + 1;
+
+        rb2D.velocity = Vector2.zero;
         rb2D.AddForce(force * multiplier, ForceMode2D.Impulse);
     }
 
@@ -241,6 +264,41 @@ public class PlayerController : MonoBehaviour
         else
         {
             grounded = false;
+        }
+    }
+
+    private GameObject FindPlaform()
+    {
+        Vector2 pointA, pointB;
+
+        pointA = new Vector2(transform.position.x - transform.localScale.x / 2 + groundCheckWidth,
+            transform.position.y - transform.localScale.y / 2 + groundCheckWidth);
+        pointB = new Vector2(transform.position.x + transform.localScale.x / 2 - groundCheckWidth,
+            transform.position.y - transform.localScale.y / 2 - groundCheckWidth);
+
+        if (Physics2D.OverlapArea(pointA, pointB, groundMask))
+        {
+            return Physics2D.OverlapArea(pointA, pointB, groundMask).gameObject;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private void ManagePlatform()
+    {
+        Vector2 pointA, pointB;
+
+        pointA = transform.position + transform.localScale * 0.5f;
+        pointB = transform.position - transform.localScale * 0.5f;
+
+        Debug.DrawLine(pointA, pointB, Color.red);
+
+        if (Physics2D.OverlapArea(pointA, pointB, groundMask) == null)
+        {
+            currentPlatform.GetComponent<PlatformEffector2D>().rotationalOffset = 0f;
+            currentPlatform = null;
         }
     }
 }
