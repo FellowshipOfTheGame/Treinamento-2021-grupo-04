@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     // Grounded check
     bool grounded;
     [SerializeField] LayerMask groundMask;
-    const float groundCheckWidth = 0.015f;
+    const float groundCheckWidth = 0.015f; // este valor foi testado
 
     // Movement variables
     [Header("Horizontal movement")]
@@ -25,9 +25,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float timeToApex;
     float gravity;
 
+    // Sprite related
+    bool facingRight = true;
+
     // Input variables
     bool jumpKey = false;
     int horizontalMove = 0;
+
+    //Damage variable
+    float dano = 0;
+    const float danoMax = 2;
+    float multiplier = 1;
 
     // Cached components
     Rigidbody2D rb2D;
@@ -56,6 +64,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public int GetPlayer()
+    {
+        return player;
+    }
+
     private void InitializeVariables()
     {
         gravity = -2 * jumpHeight / (timeToApex * timeToApex);
@@ -65,6 +78,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         ManageInputs();
 
         if (debug)
@@ -96,6 +111,7 @@ public class PlayerController : MonoBehaviour
                 rb2D.velocity = aux;
             }
 
+            if (!facingRight) FlipPlayer();
         }
         else if (horizontalMove == -1)
         {
@@ -109,6 +125,7 @@ public class PlayerController : MonoBehaviour
                 rb2D.velocity = aux;
             }
 
+            if (facingRight) FlipPlayer();
         }
         else
         {
@@ -183,9 +200,29 @@ public class PlayerController : MonoBehaviour
         */
     }
 
+    private void FlipPlayer()
+    {
+        facingRight = !facingRight;
+            
+        if (facingRight)
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        else
+            transform.rotation = Quaternion.Euler(0, 180f, 0);
+    }
+
     private void Jump()
     {
         rb2D.velocity += new Vector2(0, -gravity * timeToApex);
+    }
+
+    public void Knockback(Vector2 force, float danoProjetil)
+    {
+        if(dano < danoMax){
+            if(dano + danoProjetil < danoMax) dano += danoProjetil;
+            else dano = danoMax;
+        }
+        multiplier = dano + 1;
+        rb2D.AddForce(force * multiplier, ForceMode2D.Impulse);
     }
 
     private void CheckGrounded()
