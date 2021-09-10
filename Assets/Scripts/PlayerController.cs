@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     float multiplier = 1;
 
     // Cached components
+    BoxCollider2D bc2D;
     Rigidbody2D rb2D;
     Arma arma;
 
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        bc2D = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
         arma = GetComponent<Arma>();
         InitializeVariables();
@@ -252,10 +254,10 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 pointA, pointB;
 
-        pointA = new Vector2(transform.position.x - transform.localScale.x / 2 + groundCheckWidth, 
-            transform.position.y - transform.localScale.y / 2 + groundCheckWidth);
-        pointB = new Vector2(transform.position.x + transform.localScale.x / 2 - groundCheckWidth, 
-            transform.position.y - transform.localScale.y / 2 - groundCheckWidth);
+        pointA = new Vector2(bc2D.bounds.center.x - bc2D.bounds.extents.x + groundCheckWidth, 
+            bc2D.bounds.center.y - bc2D.bounds.extents.y + groundCheckWidth);
+        pointB = new Vector2(bc2D.bounds.center.x + bc2D.bounds.extents.x - groundCheckWidth, 
+            bc2D.bounds.center.y - bc2D.bounds.extents.y - groundCheckWidth);
 
         if (Physics2D.OverlapArea(pointA, pointB, groundMask) && rb2D.velocity.y <= 0)
         {
@@ -271,10 +273,10 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 pointA, pointB;
 
-        pointA = new Vector2(transform.position.x - transform.localScale.x / 2 + groundCheckWidth,
-            transform.position.y - transform.localScale.y / 2 + groundCheckWidth);
-        pointB = new Vector2(transform.position.x + transform.localScale.x / 2 - groundCheckWidth,
-            transform.position.y - transform.localScale.y / 2 - groundCheckWidth);
+        pointA = new Vector2(bc2D.bounds.center.x - bc2D.bounds.extents.x + groundCheckWidth, 
+            bc2D.bounds.center.y - bc2D.bounds.extents.y + groundCheckWidth);
+        pointB = new Vector2(bc2D.bounds.center.x + bc2D.bounds.extents.x - groundCheckWidth, 
+            bc2D.bounds.center.y - bc2D.bounds.extents.y - groundCheckWidth);
 
         if (Physics2D.OverlapArea(pointA, pointB, groundMask))
         {
@@ -290,8 +292,8 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 pointA, pointB;
 
-        pointA = transform.position + transform.localScale * 0.5f;
-        pointB = transform.position - transform.localScale * 0.5f;
+        pointA = bc2D.bounds.center + bc2D.bounds.extents;
+        pointB = bc2D.bounds.center - bc2D.bounds.extents;
 
         Debug.DrawLine(pointA, pointB, Color.red);
 
