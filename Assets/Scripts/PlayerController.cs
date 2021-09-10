@@ -81,8 +81,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         ManageInputs();
         if (currentPlatform != null)
         {
@@ -221,16 +219,6 @@ public class PlayerController : MonoBehaviour
                 horizontalMove = -1;
             }
         }
-
-        /*
-        if (Input.GetButtonDown("Jump"))
-        {
-            jumpKey = true;
-        }
-
-        float hMoveRaw = Input.GetAxisRaw("Horizontal");
-        horizontalMove = (hMoveRaw > 0.15f) ? 1 : (hMoveRaw < -0.15f) ? -1 : 0;
-        */
     }
 
     private void FlipPlayer()

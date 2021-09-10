@@ -148,4 +148,4 @@ MonoBehaviour:
   rb2d: {fileID: 3849103069012505015}
   vel: {x: 3, y: 0.1}
   knockbackAngle: 45
-  knockbackForce: 30
+  knockbackForce: 15

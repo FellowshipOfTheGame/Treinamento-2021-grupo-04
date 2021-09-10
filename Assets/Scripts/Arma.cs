@@ -14,7 +14,6 @@ public class Arma : MonoBehaviour {
         playerController = GetComponent<PlayerController>();
     }
 
-
     public void Atirar(){
         if(!projetil){
             projetil = Instantiate(projetilPrefab, shotPosition.position, transform.rotation) as GameObject;
