@@ -32,6 +32,11 @@ public class PlayerController : MonoBehaviour
     bool jumpKey = false;
     int horizontalMove = 0;
 
+    //Damage variable
+    float dano = 0;
+    const float danoMax = 2;
+    float multiplier = 1;
+
     // Cached components
     Rigidbody2D rb2D;
     Arma arma;
@@ -210,9 +215,14 @@ public class PlayerController : MonoBehaviour
         rb2D.velocity += new Vector2(0, -gravity * timeToApex);
     }
 
-    public void Knockback(Vector2 force)
+    public void Knockback(Vector2 force, float danoProjetil)
     {
-        rb2D.AddForce(force, ForceMode2D.Impulse);
+        if(dano < danoMax){
+            if(dano + danoProjetil < danoMax) dano += danoProjetil;
+            else dano = danoMax;
+        }
+        multiplier = dano + 1;
+        rb2D.AddForce(force * multiplier, ForceMode2D.Impulse);
     }
 
     private void CheckGrounded()

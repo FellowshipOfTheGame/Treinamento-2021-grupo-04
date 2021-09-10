@@ -8,6 +8,7 @@ public class Projetil : MonoBehaviour
     public Rigidbody2D rb2d;
     public Vector2 vel = new Vector2(1, 1);
     float lifeTime = 2f;
+    float dano = 0.2f;
 
     // knockback force
     [SerializeField] float knockbackAngle;
@@ -23,7 +24,7 @@ public class Projetil : MonoBehaviour
 
         rb2d.AddForce(vel * speed);
 
-        // vetor resultante tem mesma direção que velocidade do projétil, com ângulo e intensidade pré-especificados
+        // vetor resultante tem mesma direï¿½ï¿½o que velocidade do projï¿½til, com ï¿½ngulo e intensidade prï¿½-especificados
         knockbackVector = Mathf.Sign(rb2d.velocity.x) * DegreeToVector2(knockbackAngle) * knockbackForce;
 
         Destroy(gameObject, lifeTime);
@@ -34,7 +35,7 @@ public class Projetil : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider){
         if (collider.CompareTag("Player1") && owner != 1  || collider.CompareTag("Player2") && owner != 2)
         {
-            collider.GetComponent<PlayerController>().Knockback(knockbackVector);
+            collider.GetComponent<PlayerController>().Knockback(knockbackVector, dano);
             Destroy(this.gameObject);
         }
         else if (!collider.CompareTag("Player1") && !collider.CompareTag("Player2"))
@@ -50,7 +51,7 @@ public class Projetil : MonoBehaviour
         owner = player;
     }
 
-    // Retorna o vetor normalizado corespondente ao ângulo passado
+    // Retorna o vetor normalizado corespondente ao ï¿½ngulo passado
     Vector2 DegreeToVector2(float degree)
     {
         degree = degree * Mathf.Deg2Rad;
