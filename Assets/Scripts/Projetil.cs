@@ -37,7 +37,7 @@ public class Projetil : MonoBehaviour
             collider.GetComponent<PlayerController>().Knockback(knockbackVector);
             Destroy(this.gameObject);
         }
-        else
+        else if (!collider.CompareTag("Player1") && !collider.CompareTag("Player2"))
         {
             rb2d.velocity = Vector2.zero;
             rb2d.gravityScale = 0f;
