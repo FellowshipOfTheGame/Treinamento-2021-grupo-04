@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3849103069012504968}
   - component: {fileID: 3849103069012505012}
   - component: {fileID: 3849103069012504969}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Projetil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,12 +100,12 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0.5
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &3849103069012504968
 BoxCollider2D:
@@ -146,7 +146,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.019748665, y: 0.0015390217}
+  m_Offset: {x: 0.00007028878, y: 0.0015390217}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -157,7 +157,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13949732, y: 0.14666176}
+  m_Size: {x: 0.17885408, y: 0.14666176}
   m_EdgeRadius: 0
 --- !u!114 &3849103069012504969
 MonoBehaviour:
@@ -171,6 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdece2507d6ead409800cfe4292db74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 600
+  speed: 500
   rb2d: {fileID: 3849103069012505015}
   vel: {x: 3, y: 0.1}
+  knockbackAngle: 45
+  knockbackForce: 4
