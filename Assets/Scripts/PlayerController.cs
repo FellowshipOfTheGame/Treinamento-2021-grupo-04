@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
     {
         if (player == 1)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 arma.Atirar();
             }
@@ -173,6 +173,10 @@ public class PlayerController : MonoBehaviour
         }
         else if (player == 2)
         {
+            if (Input.GetKeyDown(KeyCode.RightControl))
+            {
+                arma.Atirar();
+            }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 jumpKey = true;
@@ -222,6 +226,8 @@ public class PlayerController : MonoBehaviour
             else dano = danoMax;
         }
         multiplier = dano + 1;
+
+        rb2D.velocity = Vector2.zero;
         rb2D.AddForce(force * multiplier, ForceMode2D.Impulse);
     }
 

@@ -7,7 +7,7 @@ public class Projetil : MonoBehaviour
     public float speed = 400;
     public Rigidbody2D rb2d;
     public Vector2 vel = new Vector2(1, 1);
-    float lifeTime = 2f;
+    float lifeTime = .8f;
     float dano = 0.2f;
 
     // knockback force
@@ -25,11 +25,10 @@ public class Projetil : MonoBehaviour
         rb2d.AddForce(vel * speed);
 
         // vetor resultante tem mesma dire��o que velocidade do proj�til, com �ngulo e intensidade pr�-especificados
-        knockbackVector = Mathf.Sign(rb2d.velocity.x) * DegreeToVector2(knockbackAngle) * knockbackForce;
+        knockbackVector = DegreeToVector2(knockbackAngle) * knockbackForce;
+        knockbackVector.x *= Mathf.Sign(transform.right.x);
 
         Destroy(gameObject, lifeTime);
-
-        Debug.Log(transform.right);
     }
 
     void OnTriggerEnter2D(Collider2D collider){
