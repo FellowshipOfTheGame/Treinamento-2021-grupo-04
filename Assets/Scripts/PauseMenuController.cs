@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class PauseMenuController : MonoBehaviour
 {
     public GameObject PauseScreenObject;
+    public GameObject EndScreenObject;
+    public string sceneName;
+    public SoundManager soundManager;
 
     public void Update()
     {
@@ -15,10 +18,13 @@ public class PauseMenuController : MonoBehaviour
             if (PauseScreenObject.activeInHierarchy)
             {
                 Time.timeScale = 0f;
+                AudioSource[] foundAudioObjects = FindObjectsOfType<AudioSource>();
+                soundManager.PauseAudioObjects();
             }
             else
             {
                 Time.timeScale = 1f;
+                soundManager.ResumeAudioObjects();
             }
         }
     }
@@ -31,11 +37,22 @@ public class PauseMenuController : MonoBehaviour
 
     public void MainMenuButton()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(sceneName);
     }
 
-    public void OptionsButton()
+    public void ContinueButton()
     {
-        Debug.Log("Options selected");
+        PauseScreenObject.SetActive(!PauseScreenObject.activeInHierarchy);
+        if (PauseScreenObject.activeInHierarchy)
+        {
+            Time.timeScale = 0f;
+            AudioSource[] foundAudioObjects = FindObjectsOfType<AudioSource>();
+            soundManager.PauseAudioObjects();
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            soundManager.ResumeAudioObjects();
+        }
     }
 }
