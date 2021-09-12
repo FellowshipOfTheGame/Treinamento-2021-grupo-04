@@ -345,6 +345,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!1001 &229187747
@@ -402,6 +406,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!4 &248963500 stripped
@@ -464,6 +472,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!1001 &337032575
@@ -525,6 +537,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!4 &355095766 stripped
@@ -597,6 +613,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!4 &518982304 stripped
@@ -659,6 +679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!1001 &698110205
@@ -716,6 +740,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!1001 &729864727
@@ -773,6 +801,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!4 &773405678 stripped
@@ -840,6 +872,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!4 &831254417 stripped
@@ -1011,6 +1047,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!4 &1216551121 stripped
@@ -1073,6 +1113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!1001 &1222258660
@@ -1130,6 +1174,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!1 &1251515043
@@ -1217,6 +1265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!1 &1386306661
@@ -1396,6 +1448,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!4 &1742763891 stripped
@@ -1598,6 +1654,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!4 &1915142461 stripped
@@ -1772,6 +1832,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 3809382406787224183, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
+      propertyPath: PauseScreenObject
+      value: 
+      objectReference: {fileID: 2267795564116566221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78784c7ea1e64094f8a01d572a2d0a92, type: 3}
 --- !u!4 &1949743879 stripped
@@ -1991,7 +2055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2048,7 +2112,7 @@ RectTransform:
   m_GameObject: {fileID: 2267795563963690009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 2267795564175488424}
   m_Father: {fileID: 2267795564116566222}
@@ -2135,8 +2199,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 0574c621a7256204099824e2c46831e0, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2279,7 +2343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2336,7 +2400,7 @@ RectTransform:
   m_GameObject: {fileID: 2267795564258713652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 2267795564552944917}
   m_Father: {fileID: 2267795564116566222}
@@ -2423,8 +2487,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 0574c621a7256204099824e2c46831e0, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2569,7 +2633,7 @@ RectTransform:
   m_GameObject: {fileID: 2267795564379678694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 2267795562756543140}
   m_Father: {fileID: 2267795564116566222}
@@ -2656,8 +2720,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 0574c621a7256204099824e2c46831e0, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2724,7 +2788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2783,6 +2847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseScreenObject: {fileID: 2267795564116566221}
+  EndScreenObject: {fileID: 0}
   sceneName: MainMenu
   soundManager: {fileID: 1765304227}
 --- !u!4 &4472075929431132194
