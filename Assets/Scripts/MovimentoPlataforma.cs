@@ -6,6 +6,7 @@ using System;
 public class MovimentoPlataforma : MonoBehaviour
 {
     public GameObject PauseScreenObject;
+    public GameObject EndScreenObject;
 
     private float yOffSet;
 
@@ -26,7 +27,7 @@ public class MovimentoPlataforma : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!PauseScreenObject.activeInHierarchy)
+        if (!PauseScreenObject.activeInHierarchy && !EndScreenObject.activeInHierarchy)
         {
             transform.Translate(new Vector2((float)Math.Sin(freqX * (Time.time + xOffSet)) * ampX, (float)Math.Sin(freqY * (Time.time + yOffSet)) * ampY));
         }
