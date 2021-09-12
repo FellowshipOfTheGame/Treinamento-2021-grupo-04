@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenuController : MonoBehaviour
 {
     public GameObject PauseScreenObject;
     public GameObject EndScreenObject;
+    public Text endText;
     public string sceneName;
     public SoundManager soundManager;
+    public DeathZone deathZone;
 
     public void Update()
     {
@@ -27,6 +30,20 @@ public class PauseMenuController : MonoBehaviour
                 soundManager.ResumeAudioObjects();
             }
         }
+
+
+
+        if (deathZone.activateEndScreen)
+        {
+            EndScreenObject.SetActive(true);
+            Time.timeScale = 0f;
+                AudioSource[] foundAudioObjects = FindObjectsOfType<AudioSource>();
+                soundManager.PauseAudioObjects();
+            endText.text = deathZone.winner; 
+            deathZone.activateEndScreen = false;
+        }
+
+    
     }
 
     public void RestartButton()

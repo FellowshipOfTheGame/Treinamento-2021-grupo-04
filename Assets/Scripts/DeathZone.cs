@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class DeathZone : MonoBehaviour
 {
     bool gameOver = false;
+    public bool activateEndScreen;
+    public string winner;
 
     private void Update()
     {
@@ -25,10 +27,11 @@ public class DeathZone : MonoBehaviour
         {
             if (!gameOver)
             {
+                activateEndScreen = true;
                 if (collider.CompareTag("Player1"))
-                    Debug.Log("Player 2 won the match!!!" + "  --> Press R to restart");
+                    winner = "Player 2 won the match!!!";
                 else if (collider.CompareTag("Player2"))
-                    Debug.Log("Player 1 won the match!!!" + "  --> Press R to restart");
+                    winner = "Player 1 won the match!!!";
             }
 
             Destroy(collider.gameObject);
