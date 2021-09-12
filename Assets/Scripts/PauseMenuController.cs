@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenuController : MonoBehaviour
 {
     public GameObject PauseScreenObject;
+    public GameObject EndScreenObject;
     public string sceneName;
     public SoundManager soundManager;
 
