@@ -36,7 +36,9 @@ public class PlayerController : MonoBehaviour
     float dano = 0;
     const float danoMax = 2;
     float multiplier = 1;
-    public int municao = 5;
+    public int municao = 10;
+    float shootCounter = 0;
+    [SerializeField] float fireRate = 0.5f;
 
     [Header("Reference components")]
     [SerializeField] GameObject cratePrefab;
@@ -50,6 +52,11 @@ public class PlayerController : MonoBehaviour
 
     //
     GameObject currentPlatform;
+
+    // 
+    public ParticleSystem poeira;
+    public BarraKnockBack barraKB;
+    public AmmoUI textoAmmo;
 
     // Sound variables
     [Header("Sound effects")]
@@ -67,6 +74,11 @@ public class PlayerController : MonoBehaviour
         InitializeVariables();
         SetPlayer();
         StartCoroutine("AmmoSpawn");
+    }
+
+    private void Start()
+    {
+        textoAmmo.ChangeText(municao);
     }
 
     private void SetPlayer()
@@ -167,7 +179,7 @@ public class PlayerController : MonoBehaviour
             rb2D.velocity = aux;
         }
 
-        // enquanto você anda, o efeito sonoro é tocado uma vez a cada intervalo de tempo
+        // enquanto vocï¿½ anda, o efeito sonoro ï¿½ tocado uma vez a cada intervalo de tempo
         if (grounded && rb2D.velocity.x != 0)
         {
             walkEffectCounter += Time.deltaTime;
@@ -187,16 +199,23 @@ public class PlayerController : MonoBehaviour
     {
         if (player == 1)
         {
+            shootCounter -= Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if(municao > 0){
-                    if (arma.Atirar())
+                if(municao > 0)
+                {
+                    if (shootCounter < 0)
                     {
-                        municao--;
-                        SoundManager.instance.PlaySoundEffects("shoot");
+                        if (arma.Atirar())
+                        {
+                            municao--;
+                            SoundManager.instance.PlaySoundEffects("shoot");
+                            textoAmmo.ChangeText(municao);
+                        }
+                        shootCounter = fireRate;
                     }
+
                 }
-                
                 
             }
             if (Input.GetKeyDown(KeyCode.W))
@@ -208,6 +227,7 @@ public class PlayerController : MonoBehaviour
                 if (currentPlatform == null)
                 {
                     currentPlatform = FindPlaform();
+                    GerarPoeira();
                 }
                 else
                 {
@@ -227,15 +247,24 @@ public class PlayerController : MonoBehaviour
         }
         else if (player == 2)
         {
+            shootCounter -= Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.RightControl))
             {
-                if(municao > 0){
-                    if(arma.Atirar())
+                if(municao > 0)
+                {
+                    if (shootCounter < 0)
                     {
-                        municao--;
-                        SoundManager.instance.PlaySoundEffects("shoot");
+                        if (arma.Atirar())
+                        {
+                            municao--;
+                            SoundManager.instance.PlaySoundEffects("shoot");
+                            textoAmmo.ChangeText(municao);
+                        }
+                        shootCounter = fireRate;
                     }
+
                 }
+                
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -246,6 +275,7 @@ public class PlayerController : MonoBehaviour
                 if (currentPlatform == null)
                 {
                     currentPlatform = FindPlaform();
+                    GerarPoeira();
                 }
                 else
                 {
@@ -273,11 +303,13 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 0);
         else
             transform.rotation = Quaternion.Euler(0, 180f, 0);
+        GerarPoeira();
     }
 
     private void Jump()
     {
         rb2D.velocity += new Vector2(0, -gravity * timeToApex);
+        GerarPoeira();
 
         //sound effect
         SoundManager.instance.PlaySoundEffects("jump");
@@ -294,6 +326,7 @@ public class PlayerController : MonoBehaviour
         rb2D.velocity = Vector2.zero;
         rb2D.AddForce(force * multiplier, ForceMode2D.Impulse);
 
+        barraKB.SetValue(dano);
         // sound effect
         SoundManager.instance.PlaySoundEffects("hit");
     }
@@ -351,16 +384,23 @@ public class PlayerController : MonoBehaviour
             currentPlatform = null;
         }
     }
+
+    private void GerarPoeira()
+    {
+        poeira.Play();
+    }
+
     public void Reload()
     {
-        if(municao > 5){
-            municao = 10;
+        if(municao > 10){
+            municao = 15;
         }
         else{
             municao += 5;
         }
 
         SoundManager.instance.PlaySoundEffects("ammo");
+        textoAmmo.ChangeText(municao);
     }
 
     IEnumerator AmmoSpawn()

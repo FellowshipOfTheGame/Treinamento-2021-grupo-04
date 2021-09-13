@@ -7,7 +7,7 @@ public class Projetil : MonoBehaviour
     public float speed = 400;
     public Rigidbody2D rb2d;
     public Vector2 vel = new Vector2(1, 1);
-    float lifeTime = .8f;
+    float lifeTime = 2f;
     float dano = 0.2f;
 
     // knockback force
