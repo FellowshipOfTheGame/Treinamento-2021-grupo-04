@@ -60,7 +60,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4401573071558022970}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &144935938921178297
 ParticleSystem:
@@ -4868,6 +4868,7 @@ Transform:
   m_Children:
   - {fileID: 6906462765820643042}
   - {fileID: 7824991370543010047}
+  - {fileID: 6970924401509978877}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4990,10 +4991,13 @@ MonoBehaviour:
   velocityLimit: 8
   jumpHeight: 4
   timeToApex: 0.28
-  poeira: {fileID: 144935938921178297}
-  municao: 5
+  municao: 10
+  fireRate: 0.8
   cratePrefab: {fileID: 6048283181586975524, guid: 648aacd89b94d9248abae6a85712fef7, type: 3}
   spawnPosition: {fileID: 7824991370543010047}
+  poeira: {fileID: 144935938921178297}
+  barraKB: {fileID: 0}
+  textoAmmo: {fileID: 0}
   walkEffectInterval: 0.35
   debug: 0
 --- !u!114 &4988350654905537573

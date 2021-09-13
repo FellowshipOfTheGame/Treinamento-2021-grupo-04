@@ -36,7 +36,9 @@ public class PlayerController : MonoBehaviour
     float dano = 0;
     const float danoMax = 2;
     float multiplier = 1;
-    public int municao = 5;
+    public int municao = 10;
+    float shootCounter = 0;
+    [SerializeField] float fireRate = 0.5f;
 
     [Header("Reference components")]
     [SerializeField] GameObject cratePrefab;
@@ -54,6 +56,8 @@ public class PlayerController : MonoBehaviour
     // 
     public ParticleSystem poeira;
     public BarraKnockBack barraKB;
+    public AmmoUI textoAmmo;
+
     // Sound variables
     [Header("Sound effects")]
     [SerializeField] float walkEffectInterval = .3f;
@@ -70,6 +74,11 @@ public class PlayerController : MonoBehaviour
         InitializeVariables();
         SetPlayer();
         StartCoroutine("AmmoSpawn");
+    }
+
+    private void Start()
+    {
+        textoAmmo.ChangeText(municao);
     }
 
     private void SetPlayer()
@@ -190,16 +199,23 @@ public class PlayerController : MonoBehaviour
     {
         if (player == 1)
         {
+            shootCounter -= Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if(municao > 0){
-                    if (arma.Atirar())
+                if(municao > 0)
+                {
+                    if (shootCounter < 0)
                     {
-                        municao--;
-                        SoundManager.instance.PlaySoundEffects("shoot");
+                        if (arma.Atirar())
+                        {
+                            municao--;
+                            SoundManager.instance.PlaySoundEffects("shoot");
+                            textoAmmo.ChangeText(municao);
+                        }
+                        shootCounter = fireRate;
                     }
+
                 }
-                
                 
             }
             if (Input.GetKeyDown(KeyCode.W))
@@ -231,15 +247,24 @@ public class PlayerController : MonoBehaviour
         }
         else if (player == 2)
         {
+            shootCounter -= Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.RightControl))
             {
-                if(municao > 0){
-                    if(arma.Atirar())
+                if(municao > 0)
+                {
+                    if (shootCounter < 0)
                     {
-                        municao--;
-                        SoundManager.instance.PlaySoundEffects("shoot");
+                        if (arma.Atirar())
+                        {
+                            municao--;
+                            SoundManager.instance.PlaySoundEffects("shoot");
+                            textoAmmo.ChangeText(municao);
+                        }
+                        shootCounter = fireRate;
                     }
+
                 }
+                
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -364,16 +389,18 @@ public class PlayerController : MonoBehaviour
     {
         poeira.Play();
     }
+
     public void Reload()
     {
-        if(municao > 5){
-            municao = 10;
+        if(municao > 10){
+            municao = 15;
         }
         else{
             municao += 5;
         }
 
         SoundManager.instance.PlaySoundEffects("ammo");
+        textoAmmo.ChangeText(municao);
     }
 
     IEnumerator AmmoSpawn()
