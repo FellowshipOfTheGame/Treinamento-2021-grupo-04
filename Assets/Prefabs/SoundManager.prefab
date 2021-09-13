@@ -48,7 +48,7 @@ MonoBehaviour:
   hitVolScale: 1
   jumpVolScale: 1.5
   shootVolScale: 7
-  walkVolScale: 1.5
+  walkVolScale: 1.8
   ammoVolScale: 5
   musicAudioSource: {fileID: 8371624092776320702}
   effectsAudioSource: {fileID: 1927176489}
