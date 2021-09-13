@@ -14,10 +14,12 @@ public class Arma : MonoBehaviour {
         playerController = GetComponent<PlayerController>();
     }
 
-    public void Atirar(){
+    public bool Atirar(){
         if(!projetil){
             projetil = Instantiate(projetilPrefab, shotPosition.position, transform.rotation) as GameObject;
             projetil.GetComponent<Projetil>().SetOwner(playerController.GetPlayer());
+            return true;
         }
+        return false;
     }
 }

@@ -32,10 +32,14 @@ public class PlayerController : MonoBehaviour
     bool jumpKey = false;
     int horizontalMove = 0;
 
-    //Damage variable
+    //Damage variables
     float dano = 0;
     const float danoMax = 2;
     float multiplier = 1;
+    public int municao = 5;
+    [SerializeField] GameObject cratePrefab;
+    GameObject ammo;
+    [SerializeField] Transform spawnPosition;
 
     // Cached components
     BoxCollider2D bc2D;
@@ -55,6 +59,7 @@ public class PlayerController : MonoBehaviour
         arma = GetComponent<Arma>();
         InitializeVariables();
         SetPlayer();
+        StartCoroutine("AmmoSpawn");
     }
 
     private void SetPlayer()
@@ -161,7 +166,12 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                arma.Atirar();
+                if(municao > 0){
+                    if(arma.Atirar())
+                        municao--;    
+                }
+                
+                
             }
             if (Input.GetKeyDown(KeyCode.W))
             {
@@ -193,7 +203,10 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.RightControl))
             {
-                arma.Atirar();
+                if(municao > 0){
+                    if(arma.Atirar())
+                        municao--;    
+                }
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -303,4 +316,25 @@ public class PlayerController : MonoBehaviour
             currentPlatform = null;
         }
     }
+    public void Reload()
+    {
+        if(municao > 5){
+            municao = 10;
+        }
+        else{
+            municao += 5;
+        }
+    }
+
+    IEnumerator AmmoSpawn()
+    {
+        while (true)
+        {
+            ammo = Instantiate(cratePrefab, spawnPosition) as GameObject;
+            ammo.transform.SetParent(null);
+            yield return new WaitForSeconds(25f);
+        }
+        
+    }
+
 }

@@ -63,6 +63,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6906462765820643042}
+  - {fileID: 7824991370543010047}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -185,6 +186,9 @@ MonoBehaviour:
   velocityLimit: 8
   jumpHeight: 4
   timeToApex: 0.28
+  municao: 5
+  cratePrefab: {fileID: 6048283181586975524, guid: 648aacd89b94d9248abae6a85712fef7, type: 3}
+  spawnPosition: {fileID: 7824991370543010047}
   debug: 0
 --- !u!114 &4988350654905537573
 MonoBehaviour:
@@ -200,3 +204,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projetilPrefab: {fileID: 3849103069012504970, guid: d4a868b7d4543414db274889aa47ce6a, type: 3}
   shotPosition: {fileID: 6906462765820643042}
+--- !u!1 &4937358942065362482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7824991370543010047}
+  m_Layer: 0
+  m_Name: SpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7824991370543010047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4937358942065362482}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 11, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4401573071558022970}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
