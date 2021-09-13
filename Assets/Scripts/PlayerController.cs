@@ -45,6 +45,10 @@ public class PlayerController : MonoBehaviour
     //
     GameObject currentPlatform;
 
+    // 
+    public ParticleSystem poeira;
+    public BarraKnockBack barraKB;
+
     // Debug purpose
     [SerializeField] bool debug;
 
@@ -172,6 +176,7 @@ public class PlayerController : MonoBehaviour
                 if (currentPlatform == null)
                 {
                     currentPlatform = FindPlaform();
+                    GerarPoeira();
                 }
                 else
                 {
@@ -204,6 +209,7 @@ public class PlayerController : MonoBehaviour
                 if (currentPlatform == null)
                 {
                     currentPlatform = FindPlaform();
+                    GerarPoeira();
                 }
                 else
                 {
@@ -231,11 +237,13 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 0);
         else
             transform.rotation = Quaternion.Euler(0, 180f, 0);
+        GerarPoeira();
     }
 
     private void Jump()
     {
         rb2D.velocity += new Vector2(0, -gravity * timeToApex);
+        GerarPoeira();
     }
 
     public void Knockback(Vector2 force, float danoProjetil)
@@ -248,6 +256,8 @@ public class PlayerController : MonoBehaviour
 
         rb2D.velocity = Vector2.zero;
         rb2D.AddForce(force * multiplier, ForceMode2D.Impulse);
+
+        barraKB.SetValue(dano);
     }
 
     private void CheckGrounded()
@@ -302,5 +312,10 @@ public class PlayerController : MonoBehaviour
             currentPlatform.GetComponent<PlatformEffector2D>().rotationalOffset = 0f;
             currentPlatform = null;
         }
+    }
+
+    private void GerarPoeira()
+    {
+        poeira.Play();
     }
 }
