@@ -32,10 +32,16 @@ public class PlayerController : MonoBehaviour
     bool jumpKey = false;
     int horizontalMove = 0;
 
-    //Damage variable
+    //Damage variables
     float dano = 0;
     const float danoMax = 2;
     float multiplier = 1;
+    public int municao = 5;
+
+    [Header("Reference components")]
+    [SerializeField] GameObject cratePrefab;
+    GameObject ammo;
+    [SerializeField] Transform spawnPosition;
 
     // Cached components
     BoxCollider2D bc2D;
@@ -48,6 +54,10 @@ public class PlayerController : MonoBehaviour
     // 
     public ParticleSystem poeira;
     public BarraKnockBack barraKB;
+    // Sound variables
+    [Header("Sound effects")]
+    [SerializeField] float walkEffectInterval = .3f;
+    float walkEffectCounter;
 
     // Debug purpose
     [SerializeField] bool debug;
@@ -59,6 +69,7 @@ public class PlayerController : MonoBehaviour
         arma = GetComponent<Arma>();
         InitializeVariables();
         SetPlayer();
+        StartCoroutine("AmmoSpawn");
     }
 
     private void SetPlayer()
@@ -82,6 +93,7 @@ public class PlayerController : MonoBehaviour
     {
         gravity = -2 * jumpHeight / (timeToApex * timeToApex);
         rb2D.gravityScale = gravity / Physics2D.gravity.y;
+        walkEffectCounter = walkEffectInterval;
     }
 
     // Update is called once per frame
@@ -157,6 +169,21 @@ public class PlayerController : MonoBehaviour
             
             rb2D.velocity = aux;
         }
+
+        // enquanto voc� anda, o efeito sonoro � tocado uma vez a cada intervalo de tempo
+        if (grounded && rb2D.velocity.x != 0)
+        {
+            walkEffectCounter += Time.deltaTime;
+            if (walkEffectCounter >= walkEffectInterval)
+            {
+                SoundManager.instance.PlaySoundEffects("walk");
+                walkEffectCounter = 0f;
+            }
+        }
+        else
+        {
+            walkEffectCounter = walkEffectInterval;
+        }
     }
 
     private void ManageInputs()
@@ -165,7 +192,15 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                arma.Atirar();
+                if(municao > 0){
+                    if (arma.Atirar())
+                    {
+                        municao--;
+                        SoundManager.instance.PlaySoundEffects("shoot");
+                    }
+                }
+                
+                
             }
             if (Input.GetKeyDown(KeyCode.W))
             {
@@ -198,7 +233,13 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.RightControl))
             {
-                arma.Atirar();
+                if(municao > 0){
+                    if(arma.Atirar())
+                    {
+                        municao--;
+                        SoundManager.instance.PlaySoundEffects("shoot");
+                    }
+                }
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -244,6 +285,9 @@ public class PlayerController : MonoBehaviour
     {
         rb2D.velocity += new Vector2(0, -gravity * timeToApex);
         GerarPoeira();
+
+        //sound effect
+        SoundManager.instance.PlaySoundEffects("jump");
     }
 
     public void Knockback(Vector2 force, float danoProjetil)
@@ -258,6 +302,8 @@ public class PlayerController : MonoBehaviour
         rb2D.AddForce(force * multiplier, ForceMode2D.Impulse);
 
         barraKB.SetValue(dano);
+        // sound effect
+        SoundManager.instance.PlaySoundEffects("hit");
     }
 
     private void CheckGrounded()
@@ -318,4 +364,27 @@ public class PlayerController : MonoBehaviour
     {
         poeira.Play();
     }
+    public void Reload()
+    {
+        if(municao > 5){
+            municao = 10;
+        }
+        else{
+            municao += 5;
+        }
+
+        SoundManager.instance.PlaySoundEffects("ammo");
+    }
+
+    IEnumerator AmmoSpawn()
+    {
+        while (true)
+        {
+            ammo = Instantiate(cratePrefab, spawnPosition) as GameObject;
+            ammo.transform.SetParent(null);
+            yield return new WaitForSeconds(25f);
+        }
+        
+    }
+
 }
