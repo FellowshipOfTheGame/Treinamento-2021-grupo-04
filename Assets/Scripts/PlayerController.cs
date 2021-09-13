@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     const float danoMax = 2;
     float multiplier = 1;
     public int municao = 5;
+
+    [Header("Reference components")]
     [SerializeField] GameObject cratePrefab;
     GameObject ammo;
     [SerializeField] Transform spawnPosition;
@@ -48,6 +50,11 @@ public class PlayerController : MonoBehaviour
 
     //
     GameObject currentPlatform;
+
+    // Sound variables
+    [Header("Sound effects")]
+    [SerializeField] float walkEffectInterval = .3f;
+    float walkEffectCounter;
 
     // Debug purpose
     [SerializeField] bool debug;
@@ -83,6 +90,7 @@ public class PlayerController : MonoBehaviour
     {
         gravity = -2 * jumpHeight / (timeToApex * timeToApex);
         rb2D.gravityScale = gravity / Physics2D.gravity.y;
+        walkEffectCounter = walkEffectInterval;
     }
 
     // Update is called once per frame
@@ -158,6 +166,21 @@ public class PlayerController : MonoBehaviour
             
             rb2D.velocity = aux;
         }
+
+        // enquanto você anda, o efeito sonoro é tocado uma vez a cada intervalo de tempo
+        if (grounded && rb2D.velocity.x != 0)
+        {
+            walkEffectCounter += Time.deltaTime;
+            if (walkEffectCounter >= walkEffectInterval)
+            {
+                SoundManager.instance.PlaySoundEffects("walk");
+                walkEffectCounter = 0f;
+            }
+        }
+        else
+        {
+            walkEffectCounter = walkEffectInterval;
+        }
     }
 
     private void ManageInputs()
@@ -167,8 +190,11 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 if(municao > 0){
-                    if(arma.Atirar())
-                        municao--;    
+                    if (arma.Atirar())
+                    {
+                        municao--;
+                        SoundManager.instance.PlaySoundEffects("shoot");
+                    }
                 }
                 
                 
@@ -205,7 +231,10 @@ public class PlayerController : MonoBehaviour
             {
                 if(municao > 0){
                     if(arma.Atirar())
-                        municao--;    
+                    {
+                        municao--;
+                        SoundManager.instance.PlaySoundEffects("shoot");
+                    }
                 }
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -249,6 +278,9 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         rb2D.velocity += new Vector2(0, -gravity * timeToApex);
+
+        //sound effect
+        SoundManager.instance.PlaySoundEffects("jump");
     }
 
     public void Knockback(Vector2 force, float danoProjetil)
@@ -261,6 +293,9 @@ public class PlayerController : MonoBehaviour
 
         rb2D.velocity = Vector2.zero;
         rb2D.AddForce(force * multiplier, ForceMode2D.Impulse);
+
+        // sound effect
+        SoundManager.instance.PlaySoundEffects("hit");
     }
 
     private void CheckGrounded()
@@ -324,6 +359,8 @@ public class PlayerController : MonoBehaviour
         else{
             municao += 5;
         }
+
+        SoundManager.instance.PlaySoundEffects("ammo");
     }
 
     IEnumerator AmmoSpawn()

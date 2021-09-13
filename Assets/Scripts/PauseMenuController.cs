@@ -10,7 +10,6 @@ public class PauseMenuController : MonoBehaviour
     public GameObject EndScreenObject;
     public Text endText;
     public string sceneName;
-    public SoundManager soundManager;
     public DeathZone deathZone;
 
     public void Update()
@@ -21,13 +20,12 @@ public class PauseMenuController : MonoBehaviour
             if (PauseScreenObject.activeInHierarchy)
             {
                 Time.timeScale = 0f;
-                AudioSource[] foundAudioObjects = FindObjectsOfType<AudioSource>();
-                soundManager.PauseAudioObjects();
+                SoundManager.instance.ReduceAudioVolume();
             }
             else
             {
                 Time.timeScale = 1f;
-                soundManager.ResumeAudioObjects();
+                SoundManager.instance.ResumeAudioVolume();
             }
         }
 
@@ -37,8 +35,7 @@ public class PauseMenuController : MonoBehaviour
         {
             EndScreenObject.SetActive(true);
             Time.timeScale = 0f;
-                AudioSource[] foundAudioObjects = FindObjectsOfType<AudioSource>();
-                soundManager.PauseAudioObjects();
+            SoundManager.instance.ReduceAudioVolume();
             endText.text = deathZone.winner; 
             deathZone.activateEndScreen = false;
         }
@@ -50,11 +47,13 @@ public class PauseMenuController : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
+        SoundManager.instance.ResumeAudioVolume();
     }
 
     public void MainMenuButton()
     {
         SceneManager.LoadScene(sceneName);
+        SoundManager.instance.ResumeAudioVolume();
     }
 
     public void ContinueButton()
@@ -64,12 +63,12 @@ public class PauseMenuController : MonoBehaviour
         {
             Time.timeScale = 0f;
             AudioSource[] foundAudioObjects = FindObjectsOfType<AudioSource>();
-            soundManager.PauseAudioObjects();
+            SoundManager.instance.ReduceAudioVolume();
         }
         else
         {
             Time.timeScale = 1f;
-            soundManager.ResumeAudioObjects();
+            SoundManager.instance.ResumeAudioVolume();
         }
     }
 }
