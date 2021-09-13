@@ -27,8 +27,8 @@ public class MainMenuController : MonoBehaviour
     {
         foreach (GameObject btn in Buttons)
         {
-            sliders[0].GetComponent<Slider>().value = PlayerPrefs.GetFloat("MusicVolume"); //Update slide value when acessing the options.
-            sliders[1].GetComponent<Slider>().value = PlayerPrefs.GetFloat("EffectsVolume");
+            sliders[0].GetComponent<Slider>().value = PlayerPrefs.GetFloat("MusicVolume", .5f); //Update slide value when acessing the options.
+            sliders[1].GetComponent<Slider>().value = PlayerPrefs.GetFloat("EffectsVolume", .5f);
             btn.SetActive(false);
             menuOptions.SetActive(true);
         }
@@ -53,6 +53,7 @@ public class MainMenuController : MonoBehaviour
     {
         PlayerPrefs.SetFloat("MusicVolume", sliders[0].GetComponent<Slider>().value); //update pref volume when leaving options.
         PlayerPrefs.SetFloat("EffectsVolume", sliders[1].GetComponent<Slider>().value);
+        SoundManager.instance.SetVolumeFromPlayerPrefs(); // update Audio Source volumes with new ones
     }
 }
 
