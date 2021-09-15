@@ -248,7 +248,7 @@ public class PlayerController : MonoBehaviour
         else if (player == 2)
         {
             shootCounter -= Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.RightControl))
+            if (Input.GetKeyDown(KeyCode.RightShift))
             {
                 if(municao > 0)
                 {
